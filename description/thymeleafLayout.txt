@@ -1,0 +1,12 @@
+W projekcie wykorzystujemy thymeleaf layout:
+http://www.thymeleaf.org/doc/articles/layouts.html pt 4.2
+Polega to na tym że w widoku za pomocą takiego wpisu:
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="adminlayout">
+definiujemy z jakiego layoutu korzysta dany widok, nasz widok niejako wstrzyknięty w miejsce w layoucie
+aby tak się  stało w widoku tworzymy element deklarując
+<div class="right_col" role="main" layout:fragment="content"> gdzie  layout:fragment="content" -
+jest definicją miejsca w które w layoucie o nazwie adminlayout zostanie nasza zawartość wstrzyknięta
+jest to sprytniejsza wersja includa, którego przykład też mamy w adminlayout.html, np: <head th:replace="gentelella/head :: head"></head>
+takich fragmentów możemy mieć w layoucie więcej - tworząc w ten sposób mocno konfigurowalne rozwiązanie.
+
+

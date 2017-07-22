@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Lista egzaminów 123</h1>
+<table>
+    <tr th:each="exam : ${list}">
+        <ul>
+            <li th:each="excercise : ${exam.exercises}" th:text="${excercise.name}"></li>
+        </ul>
+        <td th:text="${exam.name}"> Zadania:
+
+        </td>
+    </tr>
+</table>
+</body>
+</html>
