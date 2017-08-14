@@ -1,0 +1,4 @@
+Wykorzystałem:
+https://github.com/jpenren/thymeleaf-spring-data-dialect/
+Należy zmodygikować repozytorium  - korzystamy z PagingAndSortingRepository
+Doodany dodatkowy wpis do konfiguracji - aktualnie korzysta z thymeleaf 2 - taka jest domyślna wersja ze spring boota.

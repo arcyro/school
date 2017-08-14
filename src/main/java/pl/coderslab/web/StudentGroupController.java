@@ -1,6 +1,8 @@
 package pl.coderslab.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,8 @@ public class StudentGroupController {
     StudentGroupRepository studentGroupRepository;
 
     @RequestMapping("/list")
-    public String list(Model model){
-        model.addAttribute("list", studentGroupRepository.findAll());
+    public String list(Model model, @SortDefault("id") Pageable pageable){
+        model.addAttribute("page", studentGroupRepository.findAll(pageable));
         return "studentGroup/list";
     }
 }
