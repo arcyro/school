@@ -1,0 +1,16 @@
+W widoku thymeleaf określamy napisy które mają być tłumaczczone z plików w nastepujący sposób:
+<h1 th:text="#{greeting}"></h1>
+
+plik z tłumaczeniami umieszczamy w src/main/resources
+może również znajdować się  w w innych loikalizacjach:
+
+Static resources can be moved to /public (or /static or /resources or /META-INF/resources)
+in the classpath root. Same for messages.properties (Spring Boot detects this automatically
+in the root of the classpath).
+
+nazwa pliku musi być utworzona zgodnie ze wrorem:
+messages_XX.properties, where XX is the locale code.
+a pliku tym umieszczamy tłumaczenie zgodnie ze schematem:
+greeting=Hello! pl
+
+Bez utworzenia również pliku messages.properties - nie chciało zadziałać.
