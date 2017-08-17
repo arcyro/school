@@ -1,0 +1,18 @@
+Komunikaty można dodawać za pomocą helpers znajdującego sie w util.MessageHelper,
+można je dodawać zarówno do Modelu, jak również w przypadku przekierowania.
+Przykład wykorzystania:
+
+@RequestMapping(value = "/add", method = RequestMethod.POST)
+public String processRegistration(Model model, @Valid StudentGroup studentGroup, BindingResult result, RedirectAttributes redirectAttrs) {
+    if (result.hasErrors()) {
+        addErrorAttribute(model, "error.create");
+        return "studentGroup/add";
+    }
+    studentGroupRepository.save(studentGroup);
+    addSuccessAttribute(redirectAttrs, "info.success");
+
+    return "redirect:/group/list";
+}
+
+należy zwrócić uwagę że wykorzystany jest import statyczny:
+import static pl.coderslab.utils.MessageHelper.*;
