@@ -3,6 +3,7 @@ package pl.coderslab.entities;
 
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;

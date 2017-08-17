@@ -15,7 +15,7 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img th:attr="src=@{/images/img.jpg}"  class="img-circle profile_img"/>
+                        <img th:attr="src=@{/images/img.jpg}" class="img-circle profile_img"/>
 
                     </div>
                     <div class="profile_info">
@@ -25,9 +25,10 @@
                 </div>
                 <!-- /menu profile quick info -->
 
-                <br />
+                <br/>
 
-                <div th:replace="gentelella/sidebar :: sidebar" id="sidebar-menu" class="main_menu_side hidden-print main_menu"></div>
+                <div th:replace="gentelella/sidebar :: sidebar" id="sidebar-menu"
+                     class="main_menu_side hidden-print main_menu"></div>
 
                 <!-- /menu footer buttons -->
                 <div class="sidebar-footer hidden-small">
@@ -58,7 +59,8 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
-                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
                                 <img th:attr="src=@{/images/img.jpg}" alt=""/>John Doe
                                 <span class=" fa fa-angle-down"></span>
                             </a>
@@ -76,14 +78,15 @@
                         </li>
 
                         <li role="presentation" class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                               aria-expanded="false">
                                 <i class="fa fa-envelope-o"></i>
                                 <span class="badge bg-green">6</span>
                             </a>
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                 <li>
                                     <a>
-                                        <span class="image"><img th:attr="src=@{/images/img.jpg}"  alt="Profile Image" /></span>
+                                        <span class="image"><img th:attr="src=@{/images/img.jpg}" alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -95,7 +98,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img  th:attr="src=@{/images/img.jpg}" alt="Profile Image" /></span>
+                                        <span class="image"><img th:attr="src=@{/images/img.jpg}" alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -107,7 +110,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img th:attr="src=@{/images/img.jpg}" alt="Profile Image" /></span>
+                                        <span class="image"><img th:attr="src=@{/images/img.jpg}" alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -119,7 +122,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img th:attr="src=@{/images/img.jpg}" alt="Profile Image" /></span>
+                                        <span class="image"><img th:attr="src=@{/images/img.jpg}" alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -146,8 +149,18 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main" layout:fragment="content">
 
+        <div class="right_col" role="main" layout:fragment="right_col">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <!-- /* Handle the flash message */-->
+                    <th:block th:if="${message != null}">
+                        <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+                            &nbsp;</div>
+                    </th:block>
+                    <div class="x_panel" layout:fragment="content"></div>
+                </div>
+            </div>
         </div>
         <!-- /page content -->
 

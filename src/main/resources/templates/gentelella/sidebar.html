@@ -6,7 +6,8 @@
         <ul class="nav side-menu">
             <li><a><i class="fa fa-users"></i> Groups <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a th:href="@{/group/list}" href="index.html">Mentor groups</a></li>
+                    <li><a th:href="@{/group/list}" th:text="#{group.list}">Group list</a></li>
+                    <li><a th:href="@{/group/add}" th:text="#{group.add}" >Add group</a></li>
                 </ul>
             </li>
             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>

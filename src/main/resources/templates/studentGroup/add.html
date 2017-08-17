@@ -1,80 +1,67 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="adminlayout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="adminlayout">
 
 <body>
-<section layout:fragment="content">
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Form Design
-                        <small>different form elements</small>
-                    </h2>
 
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <br/>
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" th:text="#{group.name}"><span
-                                    class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" required="required"
-                                       class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name" th:text="#{group.start.date}"><span
-                                    class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="last-name" name="last-name" required="required"
-                                       class="form-control col-md-7 col-xs-12">
-                            </div>
-                            <fieldset>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <div class="col-md-11 xdisplay_inputx form-group has-feedback">
-                                            <input type="text" class="form-control has-feedback-left" id="single_cal2" placeholder="First Name" aria-describedby="inputSuccess2Status2">
-                                            <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                                            <span id="inputSuccess2Status2" class="sr-only">(success)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
+<div class="x_panel" layout:fragment="content">
+    <div class="x_title">
+        <h2>Form Design
+            <small>different form elements</small>
+        </h2>
 
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
 
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span
-                                    class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="birthday" class="date-picker form-control col-md-7 col-xs-12"
-                                       required="required" type="text">
-                            </div>
-                        </div>
-                        <div class="ln_solid"></div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <button class="btn btn-primary" type="button">Cancel</button>
-                                <button class="btn btn-primary" type="reset">Reset</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
-                        </div>
-
-                    </form>
+        <form method="post" id="demo-form2" th:action="@{/group/add}" th:object="${studentGroup}" data-parsley-validate=""
+              class="form-horizontal form-label-left">
+            <ul th:if="${#fields.hasErrors('*')}">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+            </ul>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" th:text="#{group.name}"><span
+                        class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input th:field="*{name}" type="text" id="first-name" required="required"
+                           class="form-control col-md-7 col-xs-12"/>
                 </div>
             </div>
-        </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city" th:text="#{group.city}"><span
+                        class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control" id="city" th:field="*{city}">
+                        <option th:each="city : ${cities}" th:value="${{city}}" th:text="${city.name}">Wireframe
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" th:text="#{group.start.date}"><span
+                        class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="datepicker" required="required" type="text" th:field="*{start}"
+                           class="form-control has-feedback-left datepicker"/>
+                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('start')}" th:errors="*{start}"></p>
+                </div>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <button class="btn btn-primary" type="button">Cancel</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+
+        </form>
     </div>
-</section>
-<script>
-    $('#single_cal2').datetimepicker({
-        format: 'DD.MM.YYYY'
-    });
-</script>
+</div>
+
 </body>
 </html>
