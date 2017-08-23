@@ -14,8 +14,7 @@
     </div>
     <div class="x_content">
 
-        <form method="post" id="demo-form2" th:action="@{/group/add}" th:object="${studentGroup}"
-              data-parsley-validate=""
+        <form method="post" id="demo-form2" th:action="@{/group/add}" th:object="${studentGroup}" data-parsley-validate=""
               class="form-horizontal form-label-left">
             <ul th:if="${#fields.hasErrors('*')}">
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
@@ -39,31 +38,6 @@
                         </option>
                     </select>
                 </div>
-
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city" th:text="#{mentor.name}"><span
-                        class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select class="form-control" id="mentors" th:field="*{mentor}">
-                        <option th:each="person : ${mentors}" th:value="${{person}}" th:text="${person.firstName} + ' ' +${person.lastName}">Wireframe
-                        </option>
-                    </select>
-                </div>
-
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="customerService" th:text="#{customer.service.name}"><span
-                        class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select class="form-control" id="customerService" th:field="*{customerService}">
-                        <option th:each="person : ${customersServices}" th:value="${{person}}" th:text="${person.firstName} + ' ' +${person.lastName}">Wireframe
-                        </option>
-                    </select>
-                </div>
-
             </div>
 
             <div class="form-group">

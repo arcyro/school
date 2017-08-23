@@ -11,15 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.coderslab.entities.City;
+import pl.coderslab.entities.Person;
+import pl.coderslab.entities.Role;
 import pl.coderslab.entities.StudentGroup;
 import pl.coderslab.repository.CityRepository;
-import pl.coderslab.repository.ExamRepository;
+import pl.coderslab.repository.PersonRepository;
+import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.StudentGroupRepository;
+import pl.coderslab.services.StudentGroupService;
+import pl.coderslab.utils.RoleNames;
 
 import static pl.coderslab.utils.MessageHelper.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -31,6 +35,14 @@ public class StudentGroupController {
     StudentGroupRepository studentGroupRepository;
     @Autowired
     CityRepository cityRepository;
+
+    @Autowired
+    PersonRepository personRepository;
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    StudentGroupService studentGroupService;
 
     @RequestMapping("/list")
     public String list(Model model, @SortDefault("id") Pageable pageable) {
@@ -49,13 +61,24 @@ public class StudentGroupController {
         return cityRepository.findAll();
     }
 
+    @ModelAttribute("customersServices")
+    public List<Person> getCustomerService() {
+        return personRepository.findAllByRolesName(RoleNames.CUSTOMER_SERVICE.name());
+    }
+
+    @ModelAttribute("mentors")
+    public List<Person> getMentor() {
+        return personRepository.findAllByRolesName(RoleNames.MENTOR.name());
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processRegistration(Model model, @Valid StudentGroup studentGroup, BindingResult result, RedirectAttributes redirectAttrs) {
         if (result.hasErrors()) {
             addErrorAttribute(model, "error.create");
             return "studentGroup/add";
         }
-        studentGroupRepository.save(studentGroup);
+
+        studentGroupService.initGroup(studentGroup);
         addSuccessAttribute(redirectAttrs, "info.success");
 
         return "redirect:/group/list";

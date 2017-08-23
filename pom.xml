@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>helga</name>
+	<name>school</name>
 	<description>Sample app for learn React</description>
 
 	<parent>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.eclipse.mylyn.github</groupId>
 			<artifactId>org.eclipse.egit.github.core</artifactId>
-			<version>4.8.0.201706111038-r</version>
+			<version>2.1.5</version>
 		</dependency>
 
 		<dependency>

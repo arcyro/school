@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorator="adminlayout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="adminlayout">
 
 <body>
 <div class="x_panel" layout:fragment="content">
@@ -50,8 +50,6 @@
                 <td>
                     <a th:href="@{/group-exam/{id}/list/(id=${group.id})}" class="btn btn-primary btn-xs"><i
                             class="fa fa-folder"></i> Exam </a>
-                    <a th:href="@{/student-group-repos/{id}/list/(id=${group.id})}" class="btn btn-primary btn-xs"><i
-                            class="fa fa-folder"></i> Repos </a>
                 </td>
             </tr>
             </tbody>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorator="adminlayout">
+<body>
+
+            <div class="x_panel" layout:fragment="content">
+                <div class="x_title">
+                    <h2>Result <small>for all users</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                      Navigate to group and run unit test on exam.
+                    </p>
+                    <table id="datatable" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Repo name</th>
+                            <th>Created</th>
+                            <th>Shared</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="groupRepo : ${list}">
+                            <td th:text="${groupRepo.name}"></td>
+                            <td th:text="${groupRepo.created}"></td>
+
+                            <td th:switch="${groupRepo.shared}">
+                                <th:block th:case="${true}">
+                                   <span th:text="${groupRepo.sharedDate}"></span>
+                                    <a class="btn btn-success" th:href="@{/repo-pull-request/{id}/list/(id=${groupRepo.id})}">Pull Requests</a>
+                                </th:block>
+                                <span th:case="${false}"><a class="btn btn-primary" th:href="@{/student-group-repos/{id}/share/(id=${groupRepo.id})}">Share</a></span>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+</body>
+</html>
