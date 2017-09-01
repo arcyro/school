@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -14,10 +15,7 @@ import pl.coderslab.entities.City;
 import pl.coderslab.entities.Person;
 import pl.coderslab.entities.Role;
 import pl.coderslab.entities.StudentGroup;
-import pl.coderslab.repository.CityRepository;
-import pl.coderslab.repository.PersonRepository;
-import pl.coderslab.repository.RoleRepository;
-import pl.coderslab.repository.StudentGroupRepository;
+import pl.coderslab.repository.*;
 import pl.coderslab.services.StudentGroupService;
 import pl.coderslab.utils.RoleNames;
 
@@ -43,6 +41,17 @@ public class StudentGroupController {
 
     @Autowired
     StudentGroupService studentGroupService;
+
+
+    @Autowired
+    StudentRepository studentRepository;
+
+    @RequestMapping("/{studentGroupId}/students")
+    public String list(Model model, @PathVariable("studentGroupId") long studentGroupId){
+        model.addAttribute("studentGroupId", studentGroupId);
+        model.addAttribute("list", studentRepository.findAllByStudentGroupId(studentGroupId));
+        return "studentGroup/students";
+    }
 
     @RequestMapping("/list")
     public String list(Model model, @SortDefault("id") Pageable pageable) {

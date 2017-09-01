@@ -17,15 +17,15 @@ public class RepoPullRequest {
     @Id
     @GeneratedValue
     private Long id;
-//
-//    @ManyToOne
-//    private StudentGroupRepo studentGroupRepo;
 
-//    @ManyToOne
-//    private Student student;
-//
-//    @ManyToOne
-//    private CodersLabRepo codersLabRepo;
+    @ManyToOne
+    private StudentGroupRepo studentGroupRepo;
+
+    @ManyToOne
+    private Student student;
+
+    @ManyToOne
+    private CodersLabRepo codersLabRepo;
 
     LocalDateTime created;
 
@@ -33,6 +33,8 @@ public class RepoPullRequest {
     private Boolean checked = false;
 
     private String sshUrl;
+
+    private int branch;
 
     @PrePersist
     protected void onCreate() {

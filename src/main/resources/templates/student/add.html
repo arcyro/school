@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="adminlayout">
+
+<body>
+
+<div class="x_panel" layout:fragment="content">
+    <div class="x_title">
+        <h2>Form Design
+            <small>different form elements</small>
+        </h2>
+
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+<p th:text="${studentGroupId}">asdas</p>
+        <form method="post" id="demo-form2"  th:object="${student}"
+              data-parsley-validate=""
+              class="form-horizontal form-label-left">
+            <input type="hidden" th:attr="value = ${studentGroupId}" name="studentGroup.id" />
+
+            <ul th:if="${#fields.hasErrors('*')}">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+            </ul>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" >First Name<span
+                        class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input th:field="*{firstName}" type="text" id="first-name" required="required"
+                           class="form-control col-md-7 col-xs-12"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" >Last Name<span
+                        class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input th:field="*{lastName}" type="text" id="last-name" required="required"
+                           class="form-control col-md-7 col-xs-12"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" >githubLogin<span
+                        class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input th:field="*{githubLogin}" type="text" id="github-login" required="required"
+                           class="form-control col-md-7 col-xs-12"/>
+                </div>
+            </div>
+
+
+            <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <button class="btn btn-primary" type="button">Cancel</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

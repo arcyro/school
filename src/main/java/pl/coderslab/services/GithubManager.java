@@ -10,8 +10,10 @@ import org.eclipse.egit.github.core.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.coderslab.entities.RepoPullRequest;
+import pl.coderslab.entities.Student;
 import pl.coderslab.entities.StudentGroupRepo;
 import pl.coderslab.repository.RepoPullRequestRepository;
+import pl.coderslab.repository.StudentRepository;
 import pl.coderslab.utils.RunBuild;
 
 import java.io.IOException;
@@ -22,6 +24,9 @@ public class GithubManager {
 
     @Autowired
     RepoPullRequestRepository repoPullRequestRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
 
     /**
      * move to properties file
@@ -57,8 +62,10 @@ public class GithubManager {
         teamService.addMember(gitHubId, userName);
     }
 
-    public void addRepoToTeam(int gitGubTeamId, String repoName) {
-
+    public void addRepoToTeam(int gitGubTeamId, String repoName) throws IOException {
+        RepositoryService service = new RepositoryService(client);
+        Repository repo = service.getRepository(GITHUB_ORGANIZATION, repoName);
+        teamService.addRepository(gitGubTeamId, repo);
     }
 
 
@@ -91,33 +98,29 @@ public class GithubManager {
      * @todo remove  repoPullRequestRepository - change logic
      */
     public void cloneAndCreateBranches(StudentGroupRepo studentGroupRepo) throws IOException {
-//        String reposHomeDirectory = System.getProperty("user.home");
-//        RepositoryService service = new RepositoryService(client);
-//        Repository repo = service.getRepository(GITHUB_ORGANIZATION, studentGroupRepo.getName());
-//
-//        PullRequestService pullRequestService = new PullRequestService(client);
-//        List<PullRequest> pullRequests = pullRequestService.getPullRequests(repo, GITHUB_PULL_REQUEST_STATE);
-//        //remove folder if exist
-//        /** @todo what should happened  */
-////        RunBuild.runCommand(reposHomeDirectory, "rm -rf "+studentGroupRepo.getName());
-////        String commandClone = "git clone " + repo.getSshUrl();
-////        RunBuild.runCommand(reposHomeDirectory, commandClone);
-//
-//        for (PullRequest pullRequest : pullRequests) {
-////            RunBuild.runCommand(System.getProperty("user.home"), " cd " + repo.getName() + "; git fetch origin pull/" + pullRequest.getNumber() + "/head:" + pullRequest.getNumber());
-//
-////            repoPullRequest.setStudentGroupRepo(studentGroupRepo);
-////            repoPullRequest.setSshUrl(pullRequest.getUrl());
-//            /**
-//             * @todo add set Student
-//             */
-//
-//        }
-        RepoPullRequest repoPullRequest = new RepoPullRequest();
-        repoPullRequest.setSshUrl("asd");
-        System.out.println(repoPullRequest);
-        System.out.println(repoPullRequestRepository);
-//        repoPullRequest.setStudentGroupRepo(studentGroupRepo);
-//        repoPullRequestRepository.save(repoPullRequest);
+        String reposHomeDirectory = System.getProperty("user.home");
+//        String reposHomeDirectory = System.getenv().get("PWD");
+        RepositoryService service = new RepositoryService(client);
+        Repository repo = service.getRepository(GITHUB_ORGANIZATION, studentGroupRepo.getName());
+
+        PullRequestService pullRequestService = new PullRequestService(client);
+        List<PullRequest> pullRequests = pullRequestService.getPullRequests(repo, GITHUB_PULL_REQUEST_STATE);
+        //remove folder if exist
+        /** @todo what should happened  */
+        RunBuild.runCommand(reposHomeDirectory, "rm -rf " + studentGroupRepo.getName());
+        String commandClone = "git clone " + repo.getSshUrl();
+        RunBuild.runCommand(reposHomeDirectory, commandClone);
+
+        for (PullRequest pullRequest : pullRequests) {
+            RunBuild.runCommand(reposHomeDirectory, " cd " + repo.getName() + "; git fetch origin pull/" + pullRequest.getNumber() + "/head:" + pullRequest.getNumber());
+            RepoPullRequest repoPullRequest = new RepoPullRequest();
+            repoPullRequest.setStudentGroupRepo(studentGroupRepo);
+            repoPullRequest.setSshUrl(pullRequest.getUrl());
+            repoPullRequest.setBranch(pullRequest.getNumber());
+            Student student = studentRepository.findOneByGithubLogin(pullRequest.getUser().getLogin());
+            repoPullRequest.setStudent(student);
+            repoPullRequestRepository.save(repoPullRequest);
+
+        }
     }
 }

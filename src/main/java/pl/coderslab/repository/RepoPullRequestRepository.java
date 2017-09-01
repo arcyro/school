@@ -10,5 +10,5 @@ import java.util.List;
 public interface RepoPullRequestRepository extends JpaRepository<RepoPullRequest, Long> {
 
 
-//    List<RepoPullRequest> findAllByStudentGroupRepoId(Long id);
+    List<RepoPullRequest> findAllByStudentGroupRepoId(Long id);
 }

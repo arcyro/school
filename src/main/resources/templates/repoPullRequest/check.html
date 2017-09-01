@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorator="adminlayout">
+<body>
+
+            <div class="x_panel" layout:fragment="content">
+                <div class="x_title">
+                    <h2>Wyniki testów danego repo <small>testy są hardkodowane dla jednego egzaminu - nie ma więcej testów :(</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+
+                    </p>
+                    <ul>
+                        <li th:each="result : ${results}">
+                            <h3>
+                                Wynik testu dla pliku <span th:text="${result.key}"></span>
+                                <span th:text="${result.value}"></span>
+                            <th:block th:if="${result.value}">
+                                <i class="fa fa-times text-success"></i>
+
+                            </th:block>
+                                <th:block th:unless="${result.value}">
+                                    <i class="fa fa-times text-danger"></i>
+                                </th:block>
+                            </h3>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+</body>
+</html>
