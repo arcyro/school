@@ -12,6 +12,7 @@ import pl.coderslab.entities.Student;
 import pl.coderslab.entities.StudentGroup;
 import pl.coderslab.entities.StudentGroupRepo;
 import pl.coderslab.repository.StudentGroupRepoRepository;
+import pl.coderslab.repository.StudentGroupRepository;
 import pl.coderslab.repository.StudentRepository;
 import pl.coderslab.services.GithubManager;
 
@@ -30,6 +31,12 @@ public class StudentController {
     @Autowired
     StudentRepository studentRepository;
 
+    @Autowired
+    StudentGroupRepository studentGroupRepository;
+
+    @Autowired
+    GithubManager githubManager;
+
 
     @RequestMapping(value = "/{studentGroupId}/add", method = RequestMethod.GET)
     public String studentGroupForm(Model model, @PathVariable("studentGroupId") long studentGroupId) {
@@ -44,7 +51,14 @@ public class StudentController {
             addErrorAttribute(model, "error.create");
             return "student/add";
         }
+        /** @move to service */
+        StudentGroup studentGroup = studentGroupRepository.findOne(studentGroupId);
 
+        try {
+            githubManager.addUserToTeam(studentGroup.getGithubTeamId(), student.getGithubLogin());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         studentRepository.save(student);
         addSuccessAttribute(redirectAttrs, "info.success");
 

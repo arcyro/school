@@ -28,7 +28,8 @@ public class TestService {
      * @throws IOException
      * @// FIXME: 23.08.17 change passing clazz to JUnit test
      */
-    public boolean runTest(String repoName, String className, String packageName, String testPackageName) throws ClassNotFoundException, IOException, IllegalAccessException, InstantiationException {
+    public boolean runTest(String repoName, String className, String packageName, String testPackageName)
+            throws ClassNotFoundException, IOException, IllegalAccessException, InstantiationException {
         String reposHomeDirectory = System.getProperty("user.home");
 
         //load class from directory

@@ -24,7 +24,7 @@ public class StudentGroup {
     private Long id;
     @Column(name = "name",unique=true)
     String name;
-    @OneToMany(mappedBy = "studentGroup")
+    @OneToMany(mappedBy = "studentGroup", cascade=CascadeType.REMOVE)
     private List<Student> students;
     LocalDate start;
     LocalDate end;
@@ -36,6 +36,6 @@ public class StudentGroup {
     Person customerService;
     private Integer githubTeamId;
 
-    @OneToMany(mappedBy = "studentGroup")
+    @OneToMany(mappedBy = "studentGroup", cascade=CascadeType.REMOVE)
     private List<StudentGroupRepo> studentGroupRepos = new ArrayList<>();
 }

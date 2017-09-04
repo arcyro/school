@@ -78,13 +78,13 @@ public class RepoPullRequestController {
         RepoPullRequest repoPullRequest = repoPullRequestRepository.findOne(pullRequestId);
 
         /** get exercises from database */
-        List<String> examFiles = Arrays.asList("Main1", "Main2", "Main3", "Main4", "Main5", "Main6", "Main7");
+        List<String> examFiles = Arrays.asList("Main1", "Main2", "Main3", "Main4", "Main5", "Main6");
 
         Map<String, Boolean> resultsMap = new HashMap<>();
         boolean result = false;
         for (String examFile : examFiles) {
             try {
-                result = testService.runTest("WAR_JEE_S_04_JEE_Podstawy", examFile, "exam", "pl.coderslab.testrepos.java.exam1");
+                result = testService.runTest("WAR_JEE_S_03_JEE_Exam_1", examFile, "exam", "pl.coderslab.testrepos.java.exam1");
                 System.out.println(result);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
