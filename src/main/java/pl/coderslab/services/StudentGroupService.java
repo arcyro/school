@@ -3,6 +3,7 @@ package pl.coderslab.services;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.Team;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import pl.coderslab.entities.CodersLabRepo;
 import pl.coderslab.entities.StudentGroup;
@@ -36,6 +37,7 @@ public class StudentGroupService {
      *
      * @param studentGroup
      */
+    @Async
     public void initGroup(StudentGroup studentGroup) {
 
         try {
