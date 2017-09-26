@@ -32,6 +32,7 @@ public class LoginController {
     public String registration(Model model) {
         Person person = new Person();
         model.addAttribute("person", person);
+
         return "admin/registration";
     }
 
