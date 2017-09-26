@@ -11,4 +11,7 @@ public class Role {
     @GeneratedValue
     private Long id;
     private String name;
+
+    @Column(name="role")
+    private String role;
 }

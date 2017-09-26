@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="form">
+<ul th:if="${#fields.hasErrors('*')}">
+    <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+</ul>
+<input type="hidden" th:field="*{id}" th:value="${person.id}"/>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"
+           th:text="#{person.first.name}"><span
+            class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <input th:field="*{firstName}" type="text" id="first-name" required="required"
+               class="form-control col-md-7 col-xs-12"/>
+    </div>
+</div>
+
+ <!--\*   <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" th:text="#{person.last.name}"><span
+            class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <input th:field="*{lastName}" type="text" id="last-name"
+               class="form-control col-md-7 col-xs-12"/>
+    </div>
+</div>
+*/-->
+    <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"
+           th:text="#{person.github.login}"><span
+            class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <input th:field="*{githubLogin}" type="text" id="github-login" required="required"
+               class="form-control col-md-7 col-xs-12"/>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"
+           th:text="#{person.description}"><span
+            class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea th:field="*{description}" id="message" class="form-control" name="message"></textarea>
+    </div>
+</div>
+
+
+<div class="ln_solid"></div>
+<div class="form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+        <button class="btn btn-primary" type="button">Cancel</button>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</div>
+    </div>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="adminlayout">
+
+<body>
+<div class="x_panel" layout:fragment="content">
+    <div class="x_title">
+        <h2>Form Design
+            <small>different form elements</small>
+        </h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <form method="post" id="demo-form2" th:action="@{/person/update}" th:object="${person}"
+              data-parsley-validate=""
+              class="form-horizontal form-label-left">
+            <div th:replace="person/form :: form"></div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
