@@ -6,7 +6,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import pl.coderslab.entities.Person;
 import pl.coderslab.entities.Role;
-import pl.coderslab.entities.User;
 
 import java.util.Collection;
 import java.util.List;
