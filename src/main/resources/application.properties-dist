@@ -4,10 +4,20 @@ spring.datasource.username=root
 spring.datasource.password=root
 spring.jpa.show-sql=true
 
-spring.thymeleaf.cache: false
+spring.thymeleaf.cache= false
+spring.thymeleaf.mode=LEGACYHTML5
 
 
-#spring.datasource.url = jdbc:h2:mem:app_db;DB_CLOSE_ON_EXIT=FALSE
+# ==============================================================
+# = Spring Security / Queries for AuthenticationManagerBuilder
+# ==============================================================
+spring.queries.users-query=select email, password, active from person where email=?
+spring.queries.roles-query=select p.email, r.role from person p inner join person_role pr on(p.id=pr.user_id) inner join role r on(pr.user_id=r.id) where p.email=?
+
+
+
+#spring.datasource.url = jdbc:h2:mem:app
+#_db;DB_CLOSE_ON_EXIT=FALSE
 #spring.datasource.url = jdbc:h2:file:~/h2/helga
 #spring.datasource.username = sa
 #spring.datasource.password =
