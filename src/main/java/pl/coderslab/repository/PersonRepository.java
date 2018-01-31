@@ -15,7 +15,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("SELECT p FROM Person p INNER JOIN p.roles r WHERE r IN (:roles)")
     List<Person> findByRoles(@Param("roles") Collection<Role> roles);
 
-    List<Person> findAllByRolesName(String name);
+    List<Person> findAllByRolesRole(String name);
 
     Person findByEmail(String email);
 

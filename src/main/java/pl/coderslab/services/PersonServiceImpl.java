@@ -1,17 +1,16 @@
 package pl.coderslab.services;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entities.Person;
 import pl.coderslab.entities.Role;
-import pl.coderslab.entities.User;
 import pl.coderslab.repository.PersonRepository;
 import pl.coderslab.repository.RoleRepository;
-import pl.coderslab.repository.UserRepository;
+
+import java.util.Arrays;
+import java.util.HashSet;
+
 
 
 @Service("personService")

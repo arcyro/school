@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.coderslab.entities.City;
 import pl.coderslab.entities.Person;
-import pl.coderslab.entities.Role;
 import pl.coderslab.entities.StudentGroup;
 import pl.coderslab.repository.*;
 import pl.coderslab.services.StudentGroupService;
 import pl.coderslab.utils.RoleNames;
 
-import static pl.coderslab.utils.MessageHelper.*;
-
 import javax.validation.Valid;
 import java.util.List;
+
+import static pl.coderslab.utils.MessageHelper.addErrorAttribute;
+import static pl.coderslab.utils.MessageHelper.addSuccessAttribute;
 
 @Controller
 @RequestMapping("/group")
@@ -72,12 +72,12 @@ public class StudentGroupController {
 
     @ModelAttribute("customersServices")
     public List<Person> getCustomerService() {
-        return personRepository.findAllByRolesName(RoleNames.CUSTOMER_SERVICE.name());
+        return personRepository.findAllByRolesRole(RoleNames.CUSTOMER_SERVICE.name());
     }
 
     @ModelAttribute("mentors")
     public List<Person> getMentor() {
-        return personRepository.findAllByRolesName(RoleNames.MENTOR.name());
+        return personRepository.findAllByRolesRole(RoleNames.MENTOR.name());
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
